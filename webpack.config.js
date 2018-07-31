@@ -3,18 +3,19 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
     devServer: {
-        contentBase: "./src/"
+        contentBase: "./dist/"
     },
-    entry: './src/app.js',
+    entry: ['babel-polyfill','./src/js/app.js'],
     output: {
        path: path.join(__dirname, '/dist'),
        filename: 'build.js'
     },
     optimization: {
 		//  don't minimize our code
-		minimize: false
+		minimize: true
     },
     devtool: '#eval-source-map',
+    // devtool: '#source-map',
     module: {
         rules: [
             {
@@ -28,6 +29,7 @@ module.exports = {
     },
     plugins: [
         new HtmlWebpackPlugin({
+            filename: 'index.html',
             template: './src/index.html'
         })
     ]
